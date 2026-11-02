@@ -6,7 +6,8 @@
   "icon": "assets/bexceptmod/icon.png",
   "description": "Clientseitiges FPS-, CPU- und RAM-HUD mit Nachtsicht und konfigurierbarem Performance-Modus.",
   "authors": [
-    "BlockException_"
+    "BlockException_",
+    "Honichmelone44"
   ],
   "contact": {
     "homepage": "https://comutions.de",
