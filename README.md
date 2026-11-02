@@ -49,3 +49,8 @@ Die fertigen Mod-Dateien findest du auf der
 [Releases-Seite](../../releases). Jeder Release enthält alle vier unterstützten
 Minecraft-Versionen. Die Dateien heißen `bexceptmod-<minecraft-version>-<mod-version>.jar`,
 zum Beispiel `bexceptmod-26.2-1.0.0.jar`.
+
+## Mitwirken
+
+Fehlerberichte und Pull Requests sind willkommen. Hinweise und Prüfschritte
+stehen in der [Beitragsanleitung](CONTRIBUTING.md).
