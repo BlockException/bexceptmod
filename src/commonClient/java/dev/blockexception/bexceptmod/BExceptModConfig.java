@@ -23,6 +23,7 @@ final class BExceptModConfig {
 	boolean disableAmbientOcclusion = true;
 	boolean disableEntityShadows = true;
 	boolean minimalParticles = true;
+	boolean reduceExplosionEffects;
 	boolean disableBiomeBlend = true;
 	boolean disableMipmaps = true;
 
@@ -53,6 +54,7 @@ final class BExceptModConfig {
 		config.disableAmbientOcclusion = readBoolean(properties, "disableAmbientOcclusion", config.disableAmbientOcclusion);
 		config.disableEntityShadows = readBoolean(properties, "disableEntityShadows", config.disableEntityShadows);
 		config.minimalParticles = readBoolean(properties, "minimalParticles", config.minimalParticles);
+		config.reduceExplosionEffects = readBoolean(properties, "reduceExplosionEffects", config.reduceExplosionEffects);
 		config.disableBiomeBlend = readBoolean(properties, "disableBiomeBlend", config.disableBiomeBlend);
 		config.disableMipmaps = readBoolean(properties, "disableMipmaps", config.disableMipmaps);
 		return config;
@@ -71,6 +73,7 @@ final class BExceptModConfig {
 		properties.setProperty("disableAmbientOcclusion", Boolean.toString(disableAmbientOcclusion));
 		properties.setProperty("disableEntityShadows", Boolean.toString(disableEntityShadows));
 		properties.setProperty("minimalParticles", Boolean.toString(minimalParticles));
+		properties.setProperty("reduceExplosionEffects", Boolean.toString(reduceExplosionEffects));
 		properties.setProperty("disableBiomeBlend", Boolean.toString(disableBiomeBlend));
 		properties.setProperty("disableMipmaps", Boolean.toString(disableMipmaps));
 

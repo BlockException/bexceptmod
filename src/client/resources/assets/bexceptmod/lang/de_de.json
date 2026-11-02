@@ -19,6 +19,7 @@
   "bexceptmod.config.disable_ambient_occlusion": "Umgebungsverdeckung deaktivieren",
   "bexceptmod.config.disable_entity_shadows": "Entity-Schatten deaktivieren",
   "bexceptmod.config.minimal_particles": "Partikel minimieren",
+  "bexceptmod.config.reduce_explosion_effects": "Explosionseffekte im Performance-Modus reduzieren",
   "bexceptmod.config.disable_biome_blend": "Biome-Übergänge deaktivieren",
   "bexceptmod.config.disable_mipmaps": "Mipmaps deaktivieren"
 }

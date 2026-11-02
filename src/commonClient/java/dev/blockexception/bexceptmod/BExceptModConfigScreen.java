@@ -69,6 +69,8 @@ final class BExceptModConfigScreen {
 				.setDefaultValue(true).setSaveConsumer(value -> config.disableEntityShadows = value).build());
 		performance.addEntry(entries.startBooleanToggle(Component.translatable("bexceptmod.config.minimal_particles"), config.minimalParticles)
 				.setDefaultValue(true).setSaveConsumer(value -> config.minimalParticles = value).build());
+		performance.addEntry(entries.startBooleanToggle(Component.translatable("bexceptmod.config.reduce_explosion_effects"), config.reduceExplosionEffects)
+				.setDefaultValue(false).setSaveConsumer(value -> config.reduceExplosionEffects = value).build());
 		performance.addEntry(entries.startBooleanToggle(Component.translatable("bexceptmod.config.disable_biome_blend"), config.disableBiomeBlend)
 				.setDefaultValue(true).setSaveConsumer(value -> config.disableBiomeBlend = value).build());
 		performance.addEntry(entries.startBooleanToggle(Component.translatable("bexceptmod.config.disable_mipmaps"), config.disableMipmaps)
