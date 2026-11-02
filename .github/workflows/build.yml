@@ -17,10 +17,35 @@ concurrency:
 
 jobs:
   build:
-    name: Build mod
+    name: Build Minecraft ${{ matrix.minecraft_version }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - minecraft_version: 1.21.11
+            java_version: '21'
+            fabric_api_version: 0.141.6+1.21.11
+            modmenu_version: 17.0.1
+            cloth_config_version: 21.11.153
+          - minecraft_version: 26.1
+            java_version: '25'
+            fabric_api_version: 0.145.1+26.1
+            modmenu_version: 18.0.2
+            cloth_config_version: 26.1.154
+          - minecraft_version: 26.2
+            java_version: '25'
+            fabric_api_version: 0.161.0+26.2
+            modmenu_version: 20.0.3
+            cloth_config_version: 26.2.155
+          - minecraft_version: 26.3
+            java_version: '25'
+            fabric_api_version: 0.165.0+26.3
+            modmenu_version: 21.0.0
+            cloth_config_version: 26.3.159
 
     outputs:
       release_version: ${{ steps.version.outputs.version }}
@@ -31,11 +56,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set up Java 25
+      - name: Set up Java ${{ matrix.java_version }}
         uses: actions/setup-java@v6
         with:
           distribution: temurin
-          java-version: '25'
+          java-version: ${{ matrix.java_version }}
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v6
@@ -72,19 +97,25 @@ jobs:
 
       - name: Build with Gradle
         run: |
-          if [[ -n "${RELEASE_VERSION}" ]]; then
-            ./gradlew --no-daemon clean build -Pmod_version="${RELEASE_VERSION}"
-          else
-            ./gradlew --no-daemon clean build
-          fi
+          mod_version="${RELEASE_VERSION:-$(sed -n 's/^mod_version=//p' gradle.properties | head -n 1)}"
+          ./gradlew --no-daemon clean build \
+            -Pminecraft_version="${MINECRAFT_VERSION}" \
+            -Pfabric_api_version="${FABRIC_API_VERSION}" \
+            -Pmodmenu_version="${MODMENU_VERSION}" \
+            -Pcloth_config_version="${CLOTH_CONFIG_VERSION}" \
+            -Pmod_version="${mod_version}"
         env:
           RELEASE_VERSION: ${{ steps.version.outputs.version }}
+          MINECRAFT_VERSION: ${{ matrix.minecraft_version }}
+          FABRIC_API_VERSION: ${{ matrix.fabric_api_version }}
+          MODMENU_VERSION: ${{ matrix.modmenu_version }}
+          CLOTH_CONFIG_VERSION: ${{ matrix.cloth_config_version }}
 
       - name: Upload mod JARs
         uses: actions/upload-artifact@v7
         with:
-          name: bexceptmod-${{ steps.version.outputs.version || 'build' }}-${{ github.sha }}
-          path: build/libs/*.jar
+          name: bexceptmod-${{ steps.version.outputs.version || 'build' }}-${{ matrix.minecraft_version }}-${{ github.sha }}
+          path: build/libs/bexceptmod-${{ matrix.minecraft_version }}-*.jar
           if-no-files-found: error
           compression-level: 0
 
@@ -103,8 +134,9 @@ jobs:
       - name: Download built JARs
         uses: actions/download-artifact@v8
         with:
-          name: bexceptmod-${{ needs.build.outputs.release_version }}-${{ github.sha }}
+          pattern: bexceptmod-${{ needs.build.outputs.release_version }}-*-${{ github.sha }}
           path: dist
+          merge-multiple: true
 
       - name: Create GitHub release
         env:

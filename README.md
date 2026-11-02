@@ -1,10 +1,11 @@
 # BExceptMod
 
-![Minecraft](https://img.shields.io/badge/Minecraft-26.2-brightgreen)
+![Minecraft](https://img.shields.io/badge/Minecraft-1.21.11%20%7C%2026.1--26.3-brightgreen)
 ![Fabric](https://img.shields.io/badge/Loader-Fabric-orange)
 ![Client side](https://img.shields.io/badge/Environment-Client-blue)
 
-**BExceptMod** ist eine clientseitige Fabric-Mod für Minecraft 26.2. Sie
+**BExceptMod** ist eine clientseitige Fabric-Mod für Minecraft 1.21.11, 26.1,
+26.2 und 26.3. Sie
 zeigt Systemwerte an, bietet umschaltbare Nachtsicht und enthält einen
 konfigurierbaren High-FPS-Modus.
 
@@ -26,7 +27,7 @@ anpassen. Beim Ausschalten werden die vorherigen Grafikwerte wiederhergestellt.
 
 ## Installation
 
-1. Installiere **Fabric Loader** für Minecraft 26.2.
+1. Installiere **Fabric Loader** für deine Minecraft-Version.
 2. Lege die BExceptMod-JAR und **Fabric API** in den Minecraft-Ordner `mods`.
 3. Für das grafische Einstellungsmenü installiere zusätzlich kompatible
    Versionen von [Mod Menu](https://modrinth.com/mod/modmenu) und
@@ -45,4 +46,6 @@ Nachtsicht-Stärke und Optionen des High-FPS-Modus anpassen.
 ## Download
 
 Die fertigen Mod-Dateien findest du auf der
-[Releases-Seite](../../releases).
+[Releases-Seite](../../releases). Jeder Release enthält alle vier unterstützten
+Minecraft-Versionen. Die Dateien heißen `bexceptmod-<minecraft-version>-<mod-version>.jar`,
+zum Beispiel `bexceptmod-26.2-1.0.0.jar`.

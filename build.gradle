@@ -1,6 +1,10 @@
 plugins {
-	id 'net.fabricmc.fabric-loom' version "${loom_version}"
+	id 'net.fabricmc.fabric-loom' version "${loom_version}" apply false
+	id 'net.fabricmc.fabric-loom-remap' version "${loom_version}" apply false
 }
+
+def isLegacyMinecraft = project.minecraft_version.startsWith("1.")
+apply plugin: isLegacyMinecraft ? 'net.fabricmc.fabric-loom-remap' : 'net.fabricmc.fabric-loom'
 
 version = project.mod_version
 group = project.maven_group
@@ -27,36 +31,64 @@ loom {
 	}
 }
 
+def clientVersionSources = isLegacyMinecraft
+		? ["src/legacy/java"]
+		: ["src/modernCommon/java", project.minecraft_version == "26.3" ? "src/modern263/java" : "src/modern/java"]
+sourceSets.client.java.setSrcDirs(["src/commonClient/java"] + clientVersionSources)
+
 dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
-	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
-	compileOnly "com.terraformersmc:modmenu:${project.modmenu_version}"
-	compileOnly "me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}"
-}
-
-def modVersion = project.mod_version
-
-processResources {
-	inputs.property "version", modVersion
-
-	filesMatching("fabric.mod.json") {
-		expand "version": modVersion
+	if (isLegacyMinecraft) {
+		mappings loom.officialMojangMappings()
+		modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+		modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+		modCompileOnly "com.terraformersmc:modmenu:${project.modmenu_version}"
+		modCompileOnly "me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}"
+	} else {
+		implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+		implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+		compileOnly "com.terraformersmc:modmenu:${project.modmenu_version}"
+		compileOnly "me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}"
 	}
 }
 
+def modVersion = project.mod_version
+def minecraftVersion = project.minecraft_version
+def javaVersion = isLegacyMinecraft ? 21 : 25
+
+def configureModResources = { task ->
+	task.inputs.property "version", modVersion
+	task.inputs.property "minecraft_version", minecraftVersion
+	task.inputs.property "java_version", javaVersion
+
+	task.filesMatching(["fabric.mod.json", "bexceptmod.client.mixins.json"]) {
+		expand "version": modVersion,
+				"minecraft_version": minecraftVersion,
+				"java_version": javaVersion
+	}
+}
+tasks.named("processResources").configure(configureModResources)
+tasks.named("processClientResources").configure(configureModResources)
+
 tasks.withType(JavaCompile).configureEach {
-	it.options.release = 25
+	it.options.release = javaVersion
 }
 
 java {
 	withSourcesJar()
-	sourceCompatibility = JavaVersion.VERSION_25
-	targetCompatibility = JavaVersion.VERSION_25
+	sourceCompatibility = JavaVersion.toVersion(javaVersion)
+	targetCompatibility = JavaVersion.toVersion(javaVersion)
 }
 
 jar {
+	archiveFileName = "bexceptmod-${project.minecraft_version}-${modVersion}.jar"
 	from("LICENSE") {
 		rename { "${it}_bexceptmod" }
+	}
+}
+
+if (isLegacyMinecraft) {
+	tasks.named("remapJar") {
+		archiveFileName = "bexceptmod-${minecraftVersion}-${modVersion}.jar"
 	}
 }

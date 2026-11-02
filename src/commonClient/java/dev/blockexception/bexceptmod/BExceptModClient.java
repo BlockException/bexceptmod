@@ -5,60 +5,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.sun.management.OperatingSystemMXBean;
-import com.mojang.blaze3d.platform.InputConstants;
-import org.lwjgl.glfw.GLFW;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.CloudStatus;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ParticleStatus;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
-import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.hud.VanillaHudElements;
 
 public class BExceptModClient implements ClientModInitializer {
 	private static final OperatingSystemMXBean OS_BEAN =
 			ManagementFactory.getPlatformMXBean(OperatingSystemMXBean.class);
-	private static final int PADDING = 5;
-	private static final int LINE_HEIGHT = 10;
-	private static final KeyMapping.Category KEY_CATEGORY = KeyMapping.Category.register(
-			Identifier.fromNamespaceAndPath("bexceptmod", "general")
-	);
-	private static final KeyMapping TOGGLE_GAMMA = KeyMappingHelper.registerKeyMapping(
-			new KeyMapping("key.bexceptmod.toggle_gamma", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_G, KEY_CATEGORY)
-	);
-	private static final KeyMapping TOGGLE_PERFORMANCE = KeyMappingHelper.registerKeyMapping(
-			new KeyMapping("key.bexceptmod.toggle_performance", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_H, KEY_CATEGORY)
-	);
 	private static final BExceptModConfig CONFIG = BExceptModConfig.load();
 	private static boolean gammaEnabled;
 	private static PerformanceSnapshot performanceSnapshot;
 
 	@Override
 	public void onInitializeClient() {
+		BExceptModClientPlatform.initialize();
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
-			while (TOGGLE_GAMMA.consumeClick()) {
+			while (getGammaKeyMapping().consumeClick()) {
 				gammaEnabled = !gammaEnabled;
 			}
 
-			while (TOGGLE_PERFORMANCE.consumeClick()) {
+			while (getPerformanceKeyMapping().consumeClick()) {
 				togglePerformanceMode(client);
 			}
 		});
-
-		HudElementRegistry.attachElementAfter(
-				VanillaHudElements.SUBTITLES,
-				Identifier.fromNamespaceAndPath("bexceptmod", "system_stats"),
-				BExceptModClient::renderStats
-		);
 	}
 
-	private static void renderStats(GuiGraphicsExtractor graphics, net.minecraft.client.DeltaTracker deltaTracker) {
+	static List<String> getHudLines() {
 		Minecraft minecraft = Minecraft.getInstance();
 		long maxMemory = Runtime.getRuntime().maxMemory();
 		long usedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
@@ -78,22 +55,9 @@ public class BExceptModClient implements ClientModInitializer {
 			lines.add("PERF: ON");
 		}
 		if (lines.isEmpty()) {
-			return;
+			return List.of();
 		}
-
-		int widestLine = 0;
-		for (String line : lines) {
-			widestLine = Math.max(widestLine, minecraft.font.width(line));
-		}
-
-		int right = graphics.guiWidth() - 6;
-		int left = right - widestLine - PADDING * 2;
-		int top = 6;
-		graphics.fill(left, top, right, top + LINE_HEIGHT * lines.size() + PADDING * 2, 0x90000000);
-
-		for (int i = 0; i < lines.size(); i++) {
-			graphics.text(minecraft.font, lines.get(i), left + PADDING, top + PADDING + i * LINE_HEIGHT, 0xFFFFFFFF);
-		}
+		return lines;
 	}
 
 	private static void togglePerformanceMode(Minecraft client) {
@@ -137,11 +101,11 @@ public class BExceptModClient implements ClientModInitializer {
 	}
 
 	static KeyMapping getGammaKeyMapping() {
-		return TOGGLE_GAMMA;
+		return BExceptModClientPlatform.getGammaKeyMapping();
 	}
 
 	static KeyMapping getPerformanceKeyMapping() {
-		return TOGGLE_PERFORMANCE;
+		return BExceptModClientPlatform.getPerformanceKeyMapping();
 	}
 
 	static BExceptModConfig getConfig() {
