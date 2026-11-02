@@ -1,0 +1,44 @@
+package dev.blockexception.bexceptmod;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
+
+import net.fabricmc.loader.api.FabricLoader;
+
+import com.terraformersmc.modmenu.api.ConfigScreenFactory;
+import com.terraformersmc.modmenu.api.ModMenuApi;
+
+public final class BExceptModModMenu implements ModMenuApi {
+	@Override
+	public ConfigScreenFactory<?> getModConfigScreenFactory() {
+		return parent -> FabricLoader.getInstance().isModLoaded("cloth-config")
+				? BExceptModConfigScreen.create(parent)
+				: new MissingConfigDependencyScreen(parent);
+	}
+
+	private static final class MissingConfigDependencyScreen extends Screen {
+		private final Screen parent;
+
+		private MissingConfigDependencyScreen(Screen parent) {
+			super(Component.translatable("bexceptmod.config.title"));
+			this.parent = parent;
+		}
+
+		@Override
+		protected void init() {
+			addRenderableWidget(Button.builder(
+					Component.translatable("gui.back"),
+					button -> Minecraft.getInstance().setScreenAndShow(parent)
+			).bounds(width / 2 - 100, height / 2 + 20, 200, 20).build());
+		}
+
+		@Override
+		public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float delta) {
+			super.extractRenderState(graphics, mouseX, mouseY, delta);
+			graphics.centeredText(font, Component.translatable("bexceptmod.config.missing_cloth"), width / 2, height / 2 - 12, 0xFFFFFFFF);
+		}
+	}
+}

@@ -1,0 +1,48 @@
+# BExceptMod
+
+![Minecraft](https://img.shields.io/badge/Minecraft-26.2-brightgreen)
+![Fabric](https://img.shields.io/badge/Loader-Fabric-orange)
+![Client side](https://img.shields.io/badge/Environment-Client-blue)
+
+**BExceptMod** ist eine clientseitige Fabric-Mod für Minecraft 26.2. Sie
+zeigt Systemwerte an, bietet umschaltbare Nachtsicht und enthält einen
+konfigurierbaren High-FPS-Modus.
+
+> **Praxiserfahrung:** Auf einem Laptop von 2018 mit 8 GB RAM wurden bei
+> deaktiviertem VSync und ohne FPS-Limit **140+ FPS** erreicht. Die tatsächliche
+> Bildrate hängt von Hardware, Auflösung, Welt, Mods und Einstellungen ab.
+
+## Funktionen
+
+| Funktion | Beschreibung | Standardtaste |
+| --- | --- | :---: |
+| System-HUD | FPS, CPU-Auslastung von Minecraft und belegter/verfügbarer Java-Heap oben rechts | — |
+| Nachtsicht | Clientseitig ein- und ausschalten; Stärke anpassbar | `G` |
+| High-FPS-Modus | Grafikoptionen für mehr Leistung anpassen | `H` |
+
+Der High-FPS-Modus kann Render- und Simulationsdistanz, Entity-Distanz, Wolken,
+Umgebungsverdeckung, Entity-Schatten, Partikel, Biome-Übergänge und Mipmaps
+anpassen. Beim Ausschalten werden die vorherigen Grafikwerte wiederhergestellt.
+
+## Installation
+
+1. Installiere **Fabric Loader** für Minecraft 26.2.
+2. Lege die BExceptMod-JAR und **Fabric API** in den Minecraft-Ordner `mods`.
+3. Für das grafische Einstellungsmenü installiere zusätzlich kompatible
+   Versionen von [Mod Menu](https://modrinth.com/mod/modmenu) und
+   [Cloth Config](https://modrinth.com/mod/cloth-config).
+4. Starte Minecraft mit dem Fabric-Profil.
+
+Mod Menu und Cloth Config sind nur für das grafische Einstellungsmenü nötig.
+Die Mod funktioniert auch ohne sie.
+
+## Einstellungen
+
+Die Tastenbelegungen lassen sich unter **Optionen → Steuerung → Tastenbelegung**
+ändern. Im BExceptMod-Einstellungsmenü kannst du außerdem die HUD-Anzeigen,
+Nachtsicht-Stärke und Optionen des High-FPS-Modus anpassen.
+
+## Download
+
+Die fertigen Mod-Dateien findest du auf der
+[Releases-Seite](../../releases).

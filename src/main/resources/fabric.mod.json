@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "bexceptmod",
+  "version": "${version}",
+  "name": "BExceptMod",
+  "description": "Clientseitiges FPS-, CPU- und RAM-HUD mit Nachtsicht und konfigurierbarem Performance-Modus.",
+  "authors": [
+    "BlockException_"
+  ],
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "dev.blockexception.bexceptmod.BExceptModClient"
+    ],
+    "modmenu": [
+      "dev.blockexception.bexceptmod.BExceptModModMenu"
+    ]
+  },
+  "mixins": [
+    {
+      "config": "bexceptmod.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=0.20.1",
+    "minecraft": "~26.2",
+    "java": ">=25",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "modmenu": "*",
+    "cloth-config": "*"
+  }
+}
