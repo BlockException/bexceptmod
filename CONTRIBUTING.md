@@ -44,17 +44,3 @@ Für einen gezielten Build verwende die passenden Abhängigkeiten aus
 
 Alle unterstützten Varianten benötigen Java 25 zum Ausführen des Gradle-Builds.
 Die 1.21.11-Mod wird trotzdem mit Java 21 als Zielversion kompiliert.
-
-## Wo Regeln und Checklisten gepflegt werden
-
-- **Allgemeine Beitragsregeln und lokale Prüfschritte:** Diese Datei
-  [`CONTRIBUTING.md`](./CONTRIBUTING.md).
-- **Checkliste, die bei jedem Pull Request erscheint:** die Vorlage
-  [`.github/pull_request_template.md`](./.github/pull_request_template.md).
-  Passe deren Checkboxen an, wenn Contributors weitere Schritte abarbeiten
-  sollen.
-- **Automatische Build-Prüfungen:** [`.github/workflows/build.yml`](./.github/workflows/build.yml).
-- **Vorgeschriebene Statusprüfungen vor dem Mergen:** in GitHub unter
-  **Settings → Rules → Rulesets** (oder **Settings → Branches**, je nach
-  Repository-Konfiguration). Dort kann ein Maintainer die Build-Prüfungen als
-  erforderlich festlegen.
