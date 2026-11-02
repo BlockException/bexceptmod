@@ -38,7 +38,7 @@ jobs:
           java-version: '25'
 
       - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v4
+        uses: gradle/actions/setup-gradle@v6
 
       - name: Calculate release version
         if: github.event_name == 'push' && (github.ref_name == 'main' || github.ref_name == 'master')
