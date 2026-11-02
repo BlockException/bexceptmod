@@ -33,7 +33,7 @@ public abstract class ExplosionEffectsMixin {
 			double velocityY,
 			double velocityZ
 	) {
-		if (!BExceptModClient.shouldReduceExplosionEffects()) {
+		if (!BExceptModClient.shouldReduceExplosionParticle()) {
 			level.addParticle(particle, x, y, z, velocityX, velocityY, velocityZ);
 		}
 	}
@@ -52,7 +52,7 @@ public abstract class ExplosionEffectsMixin {
 			int blockCount,
 			WeightedList<ExplosionParticleInfo> blockParticles
 	) {
-		if (!BExceptModClient.shouldReduceExplosionEffects()) {
+		if (!BExceptModClient.shouldReduceExplosionDebris()) {
 			level.trackExplosionEffects(center, radius, blockCount, blockParticles);
 		}
 	}

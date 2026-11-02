@@ -6,9 +6,11 @@
   "bexceptmod.config.missing_cloth": "Für Einstellungen bitte Cloth Config installieren.",
   "bexceptmod.config.category.controls": "Tastenbelegung",
   "bexceptmod.config.category.hud": "HUD",
+  "bexceptmod.config.category.explosions": "Explosionseffekte",
   "bexceptmod.config.category.night_vision": "Nachtsicht",
   "bexceptmod.config.category.performance": "Performance",
   "bexceptmod.config.show_fps": "FPS im HUD anzeigen",
+  "bexceptmod.config.show_frame_time": "Framezeit unter FPS anzeigen",
   "bexceptmod.config.show_cpu": "CPU im HUD anzeigen",
   "bexceptmod.config.show_ram": "RAM im HUD anzeigen",
   "bexceptmod.config.night_vision_strength": "Nachtsicht-Stärke",
@@ -19,7 +21,8 @@
   "bexceptmod.config.disable_ambient_occlusion": "Umgebungsverdeckung deaktivieren",
   "bexceptmod.config.disable_entity_shadows": "Entity-Schatten deaktivieren",
   "bexceptmod.config.minimal_particles": "Partikel minimieren",
-  "bexceptmod.config.reduce_explosion_effects": "Explosionseffekte im Performance-Modus reduzieren",
+  "bexceptmod.config.reduce_explosion_particle": "Zentralen Explosionseffekt ausblenden",
+  "bexceptmod.config.reduce_explosion_debris": "Explosions-Trümmerpartikel ausblenden",
   "bexceptmod.config.disable_biome_blend": "Biome-Übergänge deaktivieren",
   "bexceptmod.config.disable_mipmaps": "Mipmaps deaktivieren"
 }

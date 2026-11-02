@@ -21,17 +21,17 @@ konfigurierbaren High-FPS-Modus.
 
 | Funktion | Beschreibung | Standardtaste |
 | --- | --- | :---: |
-| System-HUD | FPS, CPU-Auslastung von Minecraft und belegter/verfügbarer Java-Heap oben rechts | — |
+| System-HUD | FPS, optional Framezeit darunter, CPU-Auslastung von Minecraft und belegter/verfügbarer Java-Heap oben rechts | — |
 | Nachtsicht | Clientseitig ein- und ausschalten; Stärke anpassbar | `G` |
 | High-FPS-Modus | Grafikoptionen für mehr Leistung anpassen | `H` |
 
 Der High-FPS-Modus kann Render- und Simulationsdistanz, Entity-Distanz, Wolken,
 Umgebungsverdeckung, Entity-Schatten, Partikel, Biome-Übergänge und Mipmaps
-anpassen und clientseitige Explosionseffekte reduzieren. Dabei bleiben
-Explosionsschaden, Rückstoß und Sound unverändert. Die Reduzierung von
-Explosionseffekten ist standardmäßig deaktiviert und lässt sich im
-Performance-Menü einschalten. Beim Ausschalten werden die vorherigen
-Grafikwerte wiederhergestellt.
+anpassen. Beim Ausschalten werden die vorherigen Grafikwerte wiederhergestellt.
+Die Framezeitanzeige ist standardmäßig deaktiviert. Unter **Explosionseffekte**
+kannst du unabhängig vom Performance-Modus den zentralen Explosionseffekt
+und/oder Explosions-Trümmerpartikel clientseitig ausblenden. Beide Optionen sind
+standardmäßig deaktiviert; Schaden, Rückstoß und Sound bleiben unverändert.
 
 ## Installation
 
@@ -49,7 +49,7 @@ Die Mod funktioniert auch ohne sie.
 
 Die Tastenbelegungen lassen sich unter **Optionen → Steuerung → Tastenbelegung**
 ändern. Im BExceptMod-Einstellungsmenü kannst du außerdem die HUD-Anzeigen,
-Nachtsicht-Stärke und Optionen des High-FPS-Modus anpassen.
+Nachtsicht-Stärke, Optionen des High-FPS-Modus und Explosionseffekte anpassen.
 
 ## Download
 
