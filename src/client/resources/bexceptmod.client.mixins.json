@@ -3,7 +3,8 @@
   "package": "dev.blockexception.bexceptmod.mixin",
   "compatibilityLevel": "JAVA_${java_version}",
   "client": [
-    "LightmapRenderStateExtractorMixin"
+    "LightmapRenderStateExtractorMixin",
+    "ExplosionEffectsMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -100,6 +100,10 @@ public class BExceptModClient implements ClientModInitializer {
 		return CONFIG.nightVisionPercent / 100.0F;
 	}
 
+	public static boolean shouldReduceExplosionEffects() {
+		return performanceSnapshot != null && CONFIG.reduceExplosionEffects;
+	}
+
 	static KeyMapping getGammaKeyMapping() {
 		return BExceptModClientPlatform.getGammaKeyMapping();
 	}

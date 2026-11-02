@@ -27,7 +27,11 @@ konfigurierbaren High-FPS-Modus.
 
 Der High-FPS-Modus kann Render- und Simulationsdistanz, Entity-Distanz, Wolken,
 Umgebungsverdeckung, Entity-Schatten, Partikel, Biome-Übergänge und Mipmaps
-anpassen. Beim Ausschalten werden die vorherigen Grafikwerte wiederhergestellt.
+anpassen und clientseitige Explosionseffekte reduzieren. Dabei bleiben
+Explosionsschaden, Rückstoß und Sound unverändert. Die Reduzierung von
+Explosionseffekten ist standardmäßig deaktiviert und lässt sich im
+Performance-Menü einschalten. Beim Ausschalten werden die vorherigen
+Grafikwerte wiederhergestellt.
 
 ## Installation
 
