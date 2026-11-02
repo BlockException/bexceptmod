@@ -8,6 +8,10 @@
   "authors": [
     "BlockException_"
   ],
+  "contact": {
+    "homepage": "https://comutions.de",
+    "issues": "https://github.com/BlockException/bexceptmod/issues"
+  },
   "license": "MIT",
   "environment": "client",
   "entrypoints": {
