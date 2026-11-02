@@ -1,9 +1,5 @@
 # BExceptMod
 
-<p align="center">
-  <img src="src/main/resources/assets/bexceptmod/icon.png" alt="BExceptMod Logo" width="160">
-</p>
-
 ![Minecraft](https://img.shields.io/badge/Minecraft-1.21.11%20%7C%2026.1--26.3-brightgreen)
 ![Fabric](https://img.shields.io/badge/Loader-Fabric-orange)
 ![Client side](https://img.shields.io/badge/Environment-Client-blue)
