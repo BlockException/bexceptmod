@@ -44,6 +44,9 @@ public class BExceptModClient implements ClientModInitializer {
 		List<String> lines = new ArrayList<>();
 		if (CONFIG.showFps) {
 			lines.add("FPS: " + minecraft.getFps());
+			if (CONFIG.showFrameTime) {
+				lines.add(String.format(java.util.Locale.ROOT, "Frame: %.1f ms", minecraft.getFrameTimeNs() / 1_000_000.0));
+			}
 		}
 		if (CONFIG.showCpu) {
 			lines.add("CPU: " + getCpuUsage());
@@ -100,8 +103,12 @@ public class BExceptModClient implements ClientModInitializer {
 		return CONFIG.nightVisionPercent / 100.0F;
 	}
 
-	public static boolean shouldReduceExplosionEffects() {
-		return performanceSnapshot != null && CONFIG.reduceExplosionEffects;
+	public static boolean shouldReduceExplosionParticle() {
+		return CONFIG.reduceExplosionParticle;
+	}
+
+	public static boolean shouldReduceExplosionDebris() {
+		return CONFIG.reduceExplosionDebris;
 	}
 
 	static KeyMapping getGammaKeyMapping() {

@@ -35,6 +35,8 @@ final class BExceptModConfigScreen {
 		ConfigCategory hud = builder.getOrCreateCategory(Component.translatable("bexceptmod.config.category.hud"));
 		hud.addEntry(entries.startBooleanToggle(Component.translatable("bexceptmod.config.show_fps"), config.showFps)
 				.setDefaultValue(true).setSaveConsumer(value -> config.showFps = value).build());
+		hud.addEntry(entries.startBooleanToggle(Component.translatable("bexceptmod.config.show_frame_time"), config.showFrameTime)
+				.setDefaultValue(false).setSaveConsumer(value -> config.showFrameTime = value).build());
 		hud.addEntry(entries.startBooleanToggle(Component.translatable("bexceptmod.config.show_cpu"), config.showCpu)
 				.setDefaultValue(true).setSaveConsumer(value -> config.showCpu = value).build());
 		hud.addEntry(entries.startBooleanToggle(Component.translatable("bexceptmod.config.show_ram"), config.showRam)
@@ -69,12 +71,20 @@ final class BExceptModConfigScreen {
 				.setDefaultValue(true).setSaveConsumer(value -> config.disableEntityShadows = value).build());
 		performance.addEntry(entries.startBooleanToggle(Component.translatable("bexceptmod.config.minimal_particles"), config.minimalParticles)
 				.setDefaultValue(true).setSaveConsumer(value -> config.minimalParticles = value).build());
-		performance.addEntry(entries.startBooleanToggle(Component.translatable("bexceptmod.config.reduce_explosion_effects"), config.reduceExplosionEffects)
-				.setDefaultValue(false).setSaveConsumer(value -> config.reduceExplosionEffects = value).build());
 		performance.addEntry(entries.startBooleanToggle(Component.translatable("bexceptmod.config.disable_biome_blend"), config.disableBiomeBlend)
 				.setDefaultValue(true).setSaveConsumer(value -> config.disableBiomeBlend = value).build());
 		performance.addEntry(entries.startBooleanToggle(Component.translatable("bexceptmod.config.disable_mipmaps"), config.disableMipmaps)
 				.setDefaultValue(true).setSaveConsumer(value -> config.disableMipmaps = value).build());
+
+		ConfigCategory explosions = builder.getOrCreateCategory(Component.translatable("bexceptmod.config.category.explosions"));
+		explosions.addEntry(entries.startBooleanToggle(
+						Component.translatable("bexceptmod.config.reduce_explosion_particle"),
+						config.reduceExplosionParticle
+				).setDefaultValue(false).setSaveConsumer(value -> config.reduceExplosionParticle = value).build());
+		explosions.addEntry(entries.startBooleanToggle(
+						Component.translatable("bexceptmod.config.reduce_explosion_debris"),
+						config.reduceExplosionDebris
+				).setDefaultValue(false).setSaveConsumer(value -> config.reduceExplosionDebris = value).build());
 
 		return builder.build();
 	}

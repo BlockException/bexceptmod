@@ -13,6 +13,7 @@ final class BExceptModConfig {
 	private static final Path FILE = FabricLoader.getInstance().getConfigDir().resolve("bexceptmod.properties");
 
 	boolean showFps = true;
+	boolean showFrameTime;
 	boolean showCpu = true;
 	boolean showRam = true;
 	int nightVisionPercent = 100;
@@ -23,7 +24,8 @@ final class BExceptModConfig {
 	boolean disableAmbientOcclusion = true;
 	boolean disableEntityShadows = true;
 	boolean minimalParticles = true;
-	boolean reduceExplosionEffects;
+	boolean reduceExplosionParticle;
+	boolean reduceExplosionDebris;
 	boolean disableBiomeBlend = true;
 	boolean disableMipmaps = true;
 
@@ -44,6 +46,7 @@ final class BExceptModConfig {
 		}
 
 		config.showFps = readBoolean(properties, "showFps", config.showFps);
+		config.showFrameTime = readBoolean(properties, "showFrameTime", config.showFrameTime);
 		config.showCpu = readBoolean(properties, "showCpu", config.showCpu);
 		config.showRam = readBoolean(properties, "showRam", config.showRam);
 		config.nightVisionPercent = readInt(properties, "nightVisionPercent", config.nightVisionPercent, 1, 100);
@@ -54,7 +57,9 @@ final class BExceptModConfig {
 		config.disableAmbientOcclusion = readBoolean(properties, "disableAmbientOcclusion", config.disableAmbientOcclusion);
 		config.disableEntityShadows = readBoolean(properties, "disableEntityShadows", config.disableEntityShadows);
 		config.minimalParticles = readBoolean(properties, "minimalParticles", config.minimalParticles);
-		config.reduceExplosionEffects = readBoolean(properties, "reduceExplosionEffects", config.reduceExplosionEffects);
+		boolean reduceExplosionEffects = readBoolean(properties, "reduceExplosionEffects", false);
+		config.reduceExplosionParticle = readBoolean(properties, "reduceExplosionParticle", reduceExplosionEffects);
+		config.reduceExplosionDebris = readBoolean(properties, "reduceExplosionDebris", reduceExplosionEffects);
 		config.disableBiomeBlend = readBoolean(properties, "disableBiomeBlend", config.disableBiomeBlend);
 		config.disableMipmaps = readBoolean(properties, "disableMipmaps", config.disableMipmaps);
 		return config;
@@ -63,6 +68,7 @@ final class BExceptModConfig {
 	void save() {
 		Properties properties = new Properties();
 		properties.setProperty("showFps", Boolean.toString(showFps));
+		properties.setProperty("showFrameTime", Boolean.toString(showFrameTime));
 		properties.setProperty("showCpu", Boolean.toString(showCpu));
 		properties.setProperty("showRam", Boolean.toString(showRam));
 		properties.setProperty("nightVisionPercent", Integer.toString(nightVisionPercent));
@@ -73,7 +79,8 @@ final class BExceptModConfig {
 		properties.setProperty("disableAmbientOcclusion", Boolean.toString(disableAmbientOcclusion));
 		properties.setProperty("disableEntityShadows", Boolean.toString(disableEntityShadows));
 		properties.setProperty("minimalParticles", Boolean.toString(minimalParticles));
-		properties.setProperty("reduceExplosionEffects", Boolean.toString(reduceExplosionEffects));
+		properties.setProperty("reduceExplosionParticle", Boolean.toString(reduceExplosionParticle));
+		properties.setProperty("reduceExplosionDebris", Boolean.toString(reduceExplosionDebris));
 		properties.setProperty("disableBiomeBlend", Boolean.toString(disableBiomeBlend));
 		properties.setProperty("disableMipmaps", Boolean.toString(disableMipmaps));
 
