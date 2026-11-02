@@ -81,7 +81,7 @@ jobs:
           RELEASE_VERSION: ${{ steps.version.outputs.version }}
 
       - name: Upload mod JARs
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: bexceptmod-${{ steps.version.outputs.version || 'build' }}-${{ github.sha }}
           path: build/libs/*.jar
