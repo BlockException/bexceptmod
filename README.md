@@ -64,3 +64,4 @@ for example `bexceptmod-26.2-1.0.0.jar`.
 
 Bug reports and pull requests are welcome. See the
 [contribution guide](CONTRIBUTING.md) for reporting and verification details.
+
