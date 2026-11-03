@@ -4,7 +4,7 @@
   "version": "${version}",
   "name": "BExceptMod",
   "icon": "assets/bexceptmod/icon.png",
-  "description": "Clientseitiges FPS-, CPU- und RAM-HUD mit Nachtsicht und konfigurierbarem Performance-Modus.",
+  "description": "Client-side FPS, CPU, and RAM HUD with night vision and a configurable performance mode.",
   "authors": [
     "BlockException_",
     "Honichmelone44"

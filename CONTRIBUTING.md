@@ -1,38 +1,37 @@
-# Mitwirken an BExceptMod
+# Contributing to BExceptMod
 
-Danke, dass du BExceptMod verbessern möchtest! Fehlerberichte, Vorschläge und
-Pull Requests sind willkommen.
+Thank you for helping improve BExceptMod! Bug reports, suggestions, and pull
+requests are welcome.
 
-## Änderungen vorschlagen
+## Proposing changes
 
-- **Fehler oder Ideen:** Erstelle ein Issue und beschreibe, was passiert oder
-  was du dir wünschst. Bei Fehlern helfen Minecraft-Version, Fabric-Version,
-  Schritte zum Reproduzieren und relevante Logs.
-- **Codeänderungen:** Erstelle einen Branch, ändere nur das für den Beitrag
-  Notwendige und eröffne anschließend einen Pull Request gegen `main`.
-- Erkläre im Pull Request das Problem, die Änderung und gegebenenfalls
-  sichtbare Auswirkungen auf die Mod.
+- **Bugs or ideas:** Open an issue describing what happened or what you would
+  like to see. For bug reports, include the Minecraft and Fabric versions,
+  reproduction steps, and relevant logs when possible.
+- **Code changes:** Create a branch, keep the change focused, and open a pull
+  request against `main`.
+- Describe the problem, your changes, and any visible effects on the mod in the
+  pull request.
 
-## Vor dem Pull Request
+## Before opening a pull request
 
-- [ ] Die Änderung ist auf den beschriebenen Zweck begrenzt.
-- [ ] Betroffene Minecraft-Versionen und mögliche Auswirkungen auf andere
-  unterstützte Versionen sind geprüft.
-- [ ] Der Build ist erfolgreich.
-- [ ] Dokumentation und Übersetzungen sind bei Bedarf aktualisiert.
-- [ ] Es wurden keine Zugangsdaten, privaten Daten oder generierten Build-Dateien
-  hinzugefügt.
+- [ ] The change is limited to its stated purpose.
+- [ ] Affected Minecraft versions and possible effects on other supported
+  versions have been checked.
+- [ ] The build succeeds.
+- [ ] Documentation and translations have been updated where needed.
+- [ ] No credentials, private data, or generated build files have been added.
 
-Die Mod unterstützt derzeit Minecraft **1.21.11, 26.1, 26.2 und 26.3**. Der
-GitHub-Actions-Build prüft alle vier Varianten. Lokal kannst du den Standardbuild
-für 26.2 mit folgendem Befehl prüfen:
+The mod currently supports Minecraft **1.21.11, 26.1, 26.2, and 26.3**. The
+GitHub Actions build checks all four variants. Run the default 26.2 build
+locally with:
 
 ```sh
 ./gradlew clean build
 ```
 
-Für einen gezielten Build verwende die passenden Abhängigkeiten aus
-[`.github/workflows/build.yml`](./.github/workflows/build.yml), zum Beispiel:
+For a targeted build, use the matching dependency versions from
+[`.github/workflows/build.yml`](./.github/workflows/build.yml), for example:
 
 ```sh
 ./gradlew clean build \
@@ -42,5 +41,5 @@ Für einen gezielten Build verwende die passenden Abhängigkeiten aus
   -Pcloth_config_version=21.11.153
 ```
 
-Alle unterstützten Varianten benötigen Java 25 zum Ausführen des Gradle-Builds.
-Die 1.21.11-Mod wird trotzdem mit Java 21 als Zielversion kompiliert.
+All supported variants require Java 25 to run the Gradle build. The 1.21.11 mod
+is still compiled with Java 21 as its target.

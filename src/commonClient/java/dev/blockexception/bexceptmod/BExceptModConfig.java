@@ -12,6 +12,7 @@ import net.fabricmc.loader.api.FabricLoader;
 final class BExceptModConfig {
 	private static final Path FILE = FabricLoader.getInstance().getConfigDir().resolve("bexceptmod.properties");
 
+	String language = "en_us";
 	boolean showFps = true;
 	boolean showFrameTime;
 	boolean showCpu = true;
@@ -45,6 +46,10 @@ final class BExceptModConfig {
 			throw new IllegalStateException("Could not read BExceptMod config at " + FILE, exception);
 		}
 
+		config.language = properties.getProperty("language", config.language);
+		if (!BExceptModTranslations.isSupportedLanguage(config.language)) {
+			throw new IllegalStateException("Unsupported BExceptMod language: " + config.language);
+		}
 		config.showFps = readBoolean(properties, "showFps", config.showFps);
 		config.showFrameTime = readBoolean(properties, "showFrameTime", config.showFrameTime);
 		config.showCpu = readBoolean(properties, "showCpu", config.showCpu);
@@ -67,6 +72,7 @@ final class BExceptModConfig {
 
 	void save() {
 		Properties properties = new Properties();
+		properties.setProperty("language", language);
 		properties.setProperty("showFps", Boolean.toString(showFps));
 		properties.setProperty("showFrameTime", Boolean.toString(showFrameTime));
 		properties.setProperty("showCpu", Boolean.toString(showCpu));

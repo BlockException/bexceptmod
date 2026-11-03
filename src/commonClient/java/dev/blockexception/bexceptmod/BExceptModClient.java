@@ -23,6 +23,7 @@ public class BExceptModClient implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
+		BExceptModTranslations.setLanguage(CONFIG.language);
 		BExceptModClientPlatform.initialize();
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			while (getGammaKeyMapping().consumeClick()) {
@@ -43,19 +44,26 @@ public class BExceptModClient implements ClientModInitializer {
 
 		List<String> lines = new ArrayList<>();
 		if (CONFIG.showFps) {
-			lines.add("FPS: " + minecraft.getFps());
+			lines.add(BExceptModTranslations.translate("bexceptmod.hud.fps") + ": " + minecraft.getFps());
 			if (CONFIG.showFrameTime) {
-				lines.add(String.format(java.util.Locale.ROOT, "Frame: %.1f ms", minecraft.getFrameTimeNs() / 1_000_000.0));
+				lines.add(String.format(
+						java.util.Locale.ROOT,
+						"%s: %.1f ms",
+						BExceptModTranslations.translate("bexceptmod.hud.frame_time"),
+						minecraft.getFrameTimeNs() / 1_000_000.0
+				));
 			}
 		}
 		if (CONFIG.showCpu) {
-			lines.add("CPU: " + getCpuUsage());
+			lines.add(BExceptModTranslations.translate("bexceptmod.hud.cpu") + ": " + getCpuUsage());
 		}
 		if (CONFIG.showRam) {
-			lines.add("RAM: " + toMegabytes(usedMemory) + " / " + toMegabytes(freeMemory) + " MB");
+			lines.add(BExceptModTranslations.translate("bexceptmod.hud.ram") + ": "
+					+ toMegabytes(usedMemory) + " / " + toMegabytes(freeMemory) + " MB");
 		}
 		if (performanceSnapshot != null) {
-			lines.add("PERF: ON");
+			lines.add(BExceptModTranslations.translate("bexceptmod.hud.performance") + ": "
+					+ BExceptModTranslations.translate("bexceptmod.hud.on"));
 		}
 		if (lines.isEmpty()) {
 			return List.of();
@@ -87,6 +95,7 @@ public class BExceptModClient implements ClientModInitializer {
 	}
 
 	static void applyConfigSettings() {
+		BExceptModTranslations.setLanguage(CONFIG.language);
 		if (performanceSnapshot != null) {
 			Minecraft client = Minecraft.getInstance();
 			performanceSnapshot.restore(client);
