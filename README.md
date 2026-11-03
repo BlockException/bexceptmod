@@ -9,12 +9,10 @@
 ![Client side](https://img.shields.io/badge/Environment-Client-blue)
 
 **BExceptMod** is a client-side Fabric mod for Minecraft 1.21.11, 26.1, 26.2,
-and 26.3. It displays system statistics, provides toggleable night vision, and
-includes a configurable high-FPS mode.
-
-> **Performance note:** On a 2018 laptop with 8 GB of RAM, the mod reached
-> **140+ FPS** with VSync disabled and no FPS limit. Actual frame rates depend
-> on hardware, resolution, world, mods, and settings.
+and 26.3. It adds a compact system HUD, toggleable night vision, and a
+configurable performance mode. Rather than promising a specific FPS increase,
+it lets you choose graphics settings that suit your system and restore the
+previous settings when you turn the mode off.
 
 ## Features
 
@@ -31,6 +29,26 @@ Frame-time display is disabled by default. In the **Explosion Effects**
 category, you can independently hide the central explosion effect and/or
 explosion debris particles on the client. Both options are disabled by default;
 explosion damage, knockback, and sound remain unchanged.
+
+For example, the performance mode applies the configured render distance and
+particle setting:
+
+```java
+client.options.renderDistance().set(CONFIG.renderDistance);
+client.options.particles().set(CONFIG.minimalParticles
+        ? ParticleStatus.MINIMAL
+        : performanceSnapshot.particles);
+```
+
+When the mode is turned off, it restores the values captured before activation:
+
+```java
+client.options.renderDistance().set(renderDistance);
+client.options.particles().set(particles);
+```
+
+These are excerpts from `BExceptModClient`; the actual frame rate depends on
+the system, Minecraft settings, and other installed mods.
 
 The mod settings screen offers English, German, Spanish, French, and Polish.
 English is the default, independent of Minecraft's selected language.

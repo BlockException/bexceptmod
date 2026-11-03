@@ -46,10 +46,7 @@ final class BExceptModConfig {
 			throw new IllegalStateException("Could not read BExceptMod config at " + FILE, exception);
 		}
 
-		config.language = properties.getProperty("language", config.language);
-		if (!BExceptModTranslations.isSupportedLanguage(config.language)) {
-			throw new IllegalStateException("Unsupported BExceptMod language: " + config.language);
-		}
+		config.language = BExceptModTranslations.normalizeLanguage(properties.getProperty("language", config.language));
 		config.showFps = readBoolean(properties, "showFps", config.showFps);
 		config.showFrameTime = readBoolean(properties, "showFrameTime", config.showFrameTime);
 		config.showCpu = readBoolean(properties, "showCpu", config.showCpu);

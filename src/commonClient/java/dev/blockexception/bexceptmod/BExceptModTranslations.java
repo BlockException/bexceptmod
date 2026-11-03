@@ -14,14 +14,43 @@ import com.google.gson.JsonParser;
 import net.minecraft.network.chat.Component;
 
 final class BExceptModTranslations {
+	enum Language {
+		ENGLISH("en_us", "English"),
+		GERMAN("de_de", "Deutsch"),
+		SPANISH("es_es", "Español"),
+		FRENCH("fr_fr", "Français"),
+		POLISH("pl_pl", "Polski");
+
+		private final String code;
+		private final String displayName;
+
+		Language(String code, String displayName) {
+			this.code = code;
+			this.displayName = displayName;
+		}
+
+		String code() {
+			return code;
+		}
+
+		static Language fromConfig(String value) {
+			if (value != null) {
+				for (Language language : values()) {
+					if (language.code.equalsIgnoreCase(value) || language.displayName.equalsIgnoreCase(value)) {
+						return language;
+					}
+				}
+			}
+			return ENGLISH;
+		}
+
+		@Override
+		public String toString() {
+			return displayName;
+		}
+	}
+
 	private static final List<String> LANGUAGES = List.of("en_us", "de_de", "es_es", "fr_fr", "pl_pl");
-	private static final Map<String, String> LANGUAGE_NAMES = Map.of(
-			"en_us", "English",
-			"de_de", "Deutsch",
-			"es_es", "Español",
-			"fr_fr", "Français",
-			"pl_pl", "Polski"
-	);
 	private static final Map<String, Map<String, String>> TRANSLATIONS = loadTranslations();
 	private static volatile String currentLanguage = "en_us";
 
@@ -51,15 +80,8 @@ final class BExceptModTranslations {
 		return LANGUAGES.contains(language);
 	}
 
-	static List<String> supportedLanguages() {
-		return LANGUAGES;
-	}
-
-	static String languageName(String language) {
-		if (language == null) {
-			return LANGUAGE_NAMES.get("en_us");
-		}
-		return LANGUAGE_NAMES.getOrDefault(language, language);
+	static String normalizeLanguage(String language) {
+		return Language.fromConfig(language).code();
 	}
 
 	private static Map<String, Map<String, String>> loadTranslations() {

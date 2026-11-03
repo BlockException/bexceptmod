@@ -23,14 +23,13 @@ final class BExceptModConfigScreen {
 		ConfigEntryBuilder entries = builder.entryBuilder();
 
 		ConfigCategory controls = builder.getOrCreateCategory(BExceptModTranslations.text("bexceptmod.config.category.controls"));
-		controls.addEntry(entries.startDropdownMenu(
+		controls.addEntry(entries.startEnumSelector(
 						BExceptModTranslations.text("bexceptmod.config.language"),
-						config.language,
-						value -> value,
-						value -> Component.literal(BExceptModTranslations.languageName(value))
-				).setSelections(BExceptModTranslations.supportedLanguages())
-				.setDefaultValue("en_us")
-				.setSaveConsumer(value -> config.language = value)
+						BExceptModTranslations.Language.class,
+						BExceptModTranslations.Language.fromConfig(config.language)
+				).setEnumNameProvider(value -> Component.literal(value.toString()))
+				.setDefaultValue(BExceptModTranslations.Language.ENGLISH)
+				.setSaveConsumer(value -> config.language = value.code())
 				.build());
 		controls.addEntry(entries.fillKeybindingField(
 				BExceptModTranslations.text("key.bexceptmod.toggle_gamma"),
