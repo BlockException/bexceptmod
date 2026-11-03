@@ -56,7 +56,10 @@ final class BExceptModTranslations {
 	}
 
 	static String languageName(String language) {
-		return LANGUAGE_NAMES.get(language);
+		if (language == null) {
+			return LANGUAGE_NAMES.get("en_us");
+		}
+		return LANGUAGE_NAMES.getOrDefault(language, language);
 	}
 
 	private static Map<String, Map<String, String>> loadTranslations() {
