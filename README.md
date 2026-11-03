@@ -31,10 +31,11 @@ explosion debris particles on the client. Both options are disabled by default;
 explosion damage, knockback, and sound remain unchanged.
 
 While night vision is active, BExceptMod temporarily sets Minecraft's gamma
-to its maximum and restores the previous value when disabled. This improves
-compatibility with shader packs that respect the game's gamma setting. Packs
-that replace Minecraft's lighting entirely may require their own brightness
-or night-vision option.
+to its maximum and provides the configured night-vision strength through
+Minecraft's renderer hook used by Iris. The previous gamma value is restored
+when the effect is disabled. Shader packs must use Iris's night-vision
+uniform; packs with custom lighting that ignore it may still need their own
+brightness or night-vision option.
 
 For example, the performance mode applies the configured render distance and
 particle setting:

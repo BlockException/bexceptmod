@@ -4,7 +4,8 @@
   "compatibilityLevel": "JAVA_${java_version}",
   "client": [
     "LightmapRenderStateExtractorMixin",
-    "ExplosionEffectsMixin"
+    "ExplosionEffectsMixin",
+    "ShaderNightVisionMixin"
   ],
   "injectors": {
     "defaultRequire": 1
