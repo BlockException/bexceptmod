@@ -19,7 +19,7 @@ previous settings when you turn the mode off.
 | Feature | Description | Default key |
 | --- | --- | :---: |
 | System HUD | FPS, optional frame time below it, Minecraft CPU usage, and used/available Java heap in the top-right corner | — |
-| Night vision | Toggle night vision on the client; adjust its strength | `G` |
+| Night vision | Toggle client-side night vision and temporarily raise Minecraft's gamma; adjust strength | `G` |
 | High-FPS mode | Adjust graphics options for improved performance | `H` |
 
 The high-FPS mode can adjust render and simulation distance, entity distance,
@@ -29,6 +29,12 @@ Frame-time display is disabled by default. In the **Explosion Effects**
 category, you can independently hide the central explosion effect and/or
 explosion debris particles on the client. Both options are disabled by default;
 explosion damage, knockback, and sound remain unchanged.
+
+While night vision is active, BExceptMod temporarily sets Minecraft's gamma
+to its maximum and restores the previous value when disabled. This improves
+compatibility with shader packs that respect the game's gamma setting. Packs
+that replace Minecraft's lighting entirely may require their own brightness
+or night-vision option.
 
 For example, the performance mode applies the configured render distance and
 particle setting:

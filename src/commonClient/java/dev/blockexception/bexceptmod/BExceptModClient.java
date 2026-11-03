@@ -19,6 +19,7 @@ public class BExceptModClient implements ClientModInitializer {
 			ManagementFactory.getPlatformMXBean(OperatingSystemMXBean.class);
 	private static final BExceptModConfig CONFIG = BExceptModConfig.load();
 	private static boolean gammaEnabled;
+	private static double previousGamma;
 	private static PerformanceSnapshot performanceSnapshot;
 
 	@Override
@@ -27,7 +28,11 @@ public class BExceptModClient implements ClientModInitializer {
 		BExceptModClientPlatform.initialize();
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			while (getGammaKeyMapping().consumeClick()) {
-				gammaEnabled = !gammaEnabled;
+				toggleGamma(client);
+			}
+
+			if (gammaEnabled && client.options.gamma().get() != 1.0) {
+				client.options.gamma().set(1.0);
 			}
 
 			while (getPerformanceKeyMapping().consumeClick()) {
@@ -80,6 +85,18 @@ public class BExceptModClient implements ClientModInitializer {
 
 		performanceSnapshot = PerformanceSnapshot.capture(client);
 		applyPerformanceSettings(client);
+	}
+
+	private static void toggleGamma(Minecraft client) {
+		if (gammaEnabled) {
+			gammaEnabled = false;
+			client.options.gamma().set(previousGamma);
+			return;
+		}
+
+		previousGamma = client.options.gamma().get();
+		gammaEnabled = true;
+		client.options.gamma().set(1.0);
 	}
 
 	private static void applyPerformanceSettings(Minecraft client) {
