@@ -23,14 +23,14 @@ public final class BExceptModModMenu implements ModMenuApi {
 		private final Screen parent;
 
 		private MissingConfigDependencyScreen(Screen parent) {
-			super(Component.translatable("bexceptmod.config.title"));
+			super(BExceptModTranslations.text("bexceptmod.config.title"));
 			this.parent = parent;
 		}
 
 		@Override
 		protected void init() {
 			addRenderableWidget(Button.builder(
-					Component.translatable("gui.back"),
+					BExceptModTranslations.text("bexceptmod.config.back"),
 					button -> Minecraft.getInstance().setScreenAndShow(parent)
 			).bounds(width / 2 - 100, height / 2 + 20, 200, 20).build());
 		}
@@ -38,7 +38,7 @@ public final class BExceptModModMenu implements ModMenuApi {
 		@Override
 		public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
 			super.render(graphics, mouseX, mouseY, delta);
-			Component message = Component.translatable("bexceptmod.config.missing_cloth");
+			Component message = BExceptModTranslations.text("bexceptmod.config.missing_cloth");
 			graphics.drawString(font, message, width / 2 - font.width(message) / 2, height / 2 - 12, 0xFFFFFFFF);
 		}
 	}
